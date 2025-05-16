@@ -93,14 +93,14 @@ def ensure_patchelf():
 
     iarch = 'i386' if _ARCH == 'i686' else _ARCH
     appimage = 'patchelf-{0:}.AppImage'.format(iarch)
-    baseurl = 'https://github.com/niess/patchelf.appimage/releases/download'
+    baseurl = 'https://github.com/tiny1990/patchelf.appimage/releases/download'
     log('INSTALL', 'patchelf from %s', baseurl)
 
     dirname = os.path.dirname(PATCHELF)
     patchelf = dirname + '/patchelf'
     make_tree(dirname)
     with TemporaryDirectory() as tmpdir:
-        urlretrieve(os.path.join(baseurl, 'rolling', appimage), appimage)
+        urlretrieve(os.path.join(baseurl, 'v1.0.0', appimage), appimage)
         os.chmod(appimage, stat.S_IRWXU)
         system(('./' + appimage, '--appimage-extract'))
         copy_file('squashfs-root/usr/bin/patchelf', patchelf)
